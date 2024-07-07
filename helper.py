@@ -16,6 +16,13 @@ from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
 import os
 
+
+uri = os.getenv("DATABASE_URL")
+
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+
 def sendEmail(url, senderAddress, passkey, recievers, message):
     smtp = smtplib.SMTP('smtp.gmail.com', 587) 
     smtp.ehlo() 
