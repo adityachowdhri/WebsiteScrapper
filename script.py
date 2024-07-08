@@ -50,15 +50,12 @@ while True:
                     }
                 }
                 result = documentInformation.update_one(filter, update)
-                if result.modified_count > 0:
-                    print("Document updated successfully.")
-                else:
-                    print("No documents matched the filter. No updates were made.")
                 old_text = doc["content"]
-                question = f"""What is the difference in words between these texts: Text 1: {cleaned_text} Text 2: {old_text}"""
+                question = f"""Only list the differences between these two texts: Text 1: {cleaned_text} Text 2: {old_text}"""
                 response = ollama.generate(model='llama3', prompt=question)
-                print("The response is: ", response)
-                sendEmail(link["_id"] , emailId, passkey, ["adityachowdhri123@gmail.com"], response)
+                print("The response is: ", response["response"])
+                message = "Please find the changes identifed to the website, powered by Llamma 3: " + response["response"] 
+                sendEmail(link["_id"] , emailId, passkey, ["adityachowdhri123@gmail.com"], message)
 
 
                 

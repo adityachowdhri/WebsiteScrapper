@@ -29,7 +29,7 @@ def sendEmail(url, senderAddress, passkey, recievers, message):
     smtp.starttls() 
     smtp.login(senderAddress, passkey)
     msg = MIMEMultipart() 
-    msg['Subject'] = "Change to " + url  
+    msg['Subject'] = "Change made to website"   
     msg.attach(MIMEText(message))
     smtp.sendmail(from_addr=senderAddress, to_addrs=recievers, msg=msg.as_string()) 
     smtp.quit()
