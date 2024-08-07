@@ -25,7 +25,7 @@ passkey = os.getenv("EMAIL_PASSKEY")
 
 while True:
     time.sleep(3)
-    documentInformation = connectOutput()    
+    documentInformation = connectOutput()
     documentLinks = connectInput()
     for link in documentLinks.find():
         if documentInformation.find_one({ "_id": link["_id"] }) is not None:
@@ -54,13 +54,14 @@ while True:
                 question = f"""Only list the differences between these two texts: Text 1: {cleaned_text} Text 2: {old_text}"""
                 response = ollama.generate(model='llama3', prompt=question)
                 print("The response is: ", response["response"])
-                message = "Please find the changes identifed to the website, powered by Llamma 3: " + response["response"] 
+                message = "Please find the changes identifed to the website, powered by Llamma 3: " + response["response"] + " The changes were made at the following url: " + link["_id"]; 
                 sendEmail(link["_id"] , emailId, passkey, ["adityachowdhri123@gmail.com"], message)
 
 
                 
         else:
-            print(createNewRecord(documentInformation, link["_id"]))
+            createNewRecord(documentInformation, link["_id"])
+            print("New record created")
             
         
 

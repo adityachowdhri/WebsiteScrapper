@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 import os
 
 
-uri = os.getenv("DATABASE_URL")
+uri = "mongodb+srv://adityachowdhri2:2be4cwEO83xNRiqA@webscraping.9rrm6xc.mongodb.net/?appName=WebScraping"
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -29,7 +29,7 @@ def sendEmail(url, senderAddress, passkey, recievers, message):
     smtp.starttls() 
     smtp.login(senderAddress, passkey)
     msg = MIMEMultipart() 
-    msg['Subject'] = "Change made to website"   
+    msg['Subject'] = "Changes made"   
     msg.attach(MIMEText(message))
     smtp.sendmail(from_addr=senderAddress, to_addrs=recievers, msg=msg.as_string()) 
     smtp.quit()
